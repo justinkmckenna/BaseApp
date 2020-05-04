@@ -17,11 +17,9 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
   }
 
   db = client.db();
-  console.log("Database connection ready");
 
   var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
-    console.log("App now running on port", port);
   });
 });
 
@@ -29,6 +27,12 @@ function handleError(res, reason, message, code) {
     console.log("ERROR: " + reason);
     res.status(code || 500).json({"error": message});
   }
+
+  app.get("/api/test", function(req,res) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World');
+  });
   
   app.get("/api/contacts", function(req, res) {
     db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
