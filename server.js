@@ -31,7 +31,7 @@ function handleError(res, reason, message, code) {
   app.get("/", function(req,res) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
-    res.end('BaseAppQA Works!');
+    res.end('BaseApp Works!');
   });
   
   app.get("/api/contacts", function(req, res) {
