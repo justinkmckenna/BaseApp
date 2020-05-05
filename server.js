@@ -28,10 +28,10 @@ function handleError(res, reason, message, code) {
     res.status(code || 500).json({"error": message});
   }
 
-  app.get("/api/test", function(req,res) {
+  app.get("/", function(req,res) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
+    res.end('BaseAppQA Works!');
   });
   
   app.get("/api/contacts", function(req, res) {
