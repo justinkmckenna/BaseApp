@@ -7,8 +7,7 @@ const mongoose = require('mongoose');
 var app = express();
 app.use(bodyParser.json());
 
-var distDir = __dirname + 'dist';
-app.use(express.static(distDir));
+app.use(express.static(__dirname + '/dist/BaseApp'));
 app.use('/', routes);
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });

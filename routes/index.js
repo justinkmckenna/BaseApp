@@ -5,8 +5,8 @@ const bodyParser = require("body-parser");
 routes.use('/api/contacts', contacts);
 routes.use(bodyParser.json());
 
-routes.get('/', (req, res) => {
-  res.status(200).json('BaseApp Works!');
+routes.get('/api/test', (req, res) => {
+  res.status(200).json('BaseApp API Works!');
 });
 
 module.exports = routes;
