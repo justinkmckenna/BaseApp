@@ -1,8 +1,8 @@
 const routes = require('express').Router();
-const contacts = require('./contacts');
+const products = require('./products');
 const bodyParser = require("body-parser");
 
-routes.use('/api/contacts', contacts);
+routes.use('/api/products', products);
 routes.use(bodyParser.json());
 
 routes.get('/api/test', (req, res) => {
