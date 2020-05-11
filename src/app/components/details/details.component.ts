@@ -1,36 +1,36 @@
-import { Component, Input } from '@angular/core';
-import { Contact } from '../../models/contact';
-import { ContactService } from '../../services/app.service';
+// import { Component, Input } from '@angular/core';
+// import { Contact } from '../../models/product';
+// import { ContactService } from '../../services/app.service';
 
-@Component({
-  selector: 'details',
-  templateUrl: './details.component.html',
-})
+// @Component({
+//   selector: 'details',
+//   templateUrl: './details.component.html',
+// })
 
-export class DetailsComponent {
-  @Input() contact: Contact;
+// export class DetailsComponent {
+//   @Input() contact: Contact;
 
-  @Input() createHandler: Function;
-  @Input() updateHandler: Function;
-  @Input() deleteHandler: Function;
+//   @Input() createHandler: Function;
+//   @Input() updateHandler: Function;
+//   @Input() deleteHandler: Function;
 
-  constructor(private contactService: ContactService) { }
+//   constructor(private contactService: ContactService) { }
 
-  createContact(contact: Contact) {
-    this.contactService.createContact(contact).then((newContact: Contact) => {
-      this.createHandler(newContact);
-    });
-  }
+//   createContact(contact: Contact) {
+//     this.contactService.createContact(contact).then((newContact: Contact) => {
+//       this.createHandler(newContact);
+//     });
+//   }
 
-  updateContact(contact: Contact): void {
-    this.contactService.updateContact(contact).then((updatedContact: Contact) => {
-      this.updateHandler(updatedContact);
-    });
-  }
+//   updateContact(contact: Contact): void {
+//     this.contactService.updateContact(contact).then((updatedContact: Contact) => {
+//       this.updateHandler(updatedContact);
+//     });
+//   }
 
-  deleteContact(contactId: String): void {
-    this.contactService.deleteContact(contactId).then((deletedContactId: String) => {
-      this.deleteHandler(deletedContactId);
-    });
-  }
-}
+//   deleteContact(contactId: String): void {
+//     this.contactService.deleteContact(contactId).then((deletedContactId: String) => {
+//       this.deleteHandler(deletedContactId);
+//     });
+//   }
+// }

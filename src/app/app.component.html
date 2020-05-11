@@ -1,5 +1,21 @@
-<div class="container">
-  <contacts></contacts>
-</div>
+<div class="d-flex flex-column align-content-center h-100">
 
-<router-outlet></router-outlet>
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+    <mdb-navbar-brand style="color: #ffff;">My E-Commerce Website</mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li [ngClass]="{'active': component == ''}" class="nav-item">
+          <a class="nav-link waves-light" (click)="goToPage('')" mdbWavesEffect>Home</a>
+        </li>
+        <li [ngClass]="{'active': component == 'products'}" class="nav-item">
+          <a class="nav-link waves-light" (click)="goToPage('products')" mdbWavesEffect>Products</a>
+        </li>
+      </ul>
+    </links>
+  </mdb-navbar>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
