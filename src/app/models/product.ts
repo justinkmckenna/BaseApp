@@ -3,5 +3,5 @@ export class Product {
     name: string = "";
     description: string = "";
     picture: string = "";
-    price: number = 0.00;
+    price: number = 0;
   }

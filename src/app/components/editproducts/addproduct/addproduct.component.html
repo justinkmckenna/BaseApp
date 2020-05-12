@@ -9,7 +9,7 @@
             <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <strong>Error: </strong> There was an error adding the product.
+            <strong>Error: </strong> Unable to add product.
         </div>
         <div class="md-form">
             <input mdbInput type="text" name="name" id="name" [(ngModel)]="product.name" class="form-control">
@@ -27,7 +27,7 @@
         </div>
         <div class="md-form">
             <div class="md-form">
-                <input type="number" class="form-control" id="numberInputEx" mdbInput>
+                <input type="number" class="form-control" id="numberInputEx" [(ngModel)]="product.price" mdbInput>
                 <label for="numberInputEx">Price</label>
             </div>
         </div>

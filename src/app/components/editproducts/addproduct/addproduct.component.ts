@@ -23,7 +23,6 @@ export class AddProductComponent {
       this.createHandler(newProduct);
       this.close();
     }).catch((err) => {
-      console.log(err);
       this.showError = true;
     });
   }
