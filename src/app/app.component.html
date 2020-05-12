@@ -4,8 +4,8 @@
     <mdb-navbar-brand style="color: #ffff;">My E-Commerce Website</mdb-navbar-brand>
     <links>
       <ul class="navbar-nav mr-auto">
-        <li [ngClass]="{'active': component == ''}" class="nav-item">
-          <a class="nav-link waves-light" (click)="goToPage('')" mdbWavesEffect>Home</a>
+        <li [ngClass]="{'active': component == 'home'}" class="nav-item">
+          <a class="nav-link waves-light" (click)="goToPage('home')" mdbWavesEffect>Home</a>
         </li>
         <li [ngClass]="{'active': component == 'products'}" class="nav-item">
           <a class="nav-link waves-light" (click)="goToPage('products')" mdbWavesEffect>Products</a>

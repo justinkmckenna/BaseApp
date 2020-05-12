@@ -8,13 +8,15 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './components/products/products.component';
+import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ProductsComponent
+    ProductsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
