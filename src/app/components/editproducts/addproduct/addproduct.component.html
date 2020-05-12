@@ -1,34 +1,37 @@
-<div class="text-center modal-lg dark-background">
+<div class="modal-lg dark-background">
     <mdb-icon class="p-1" style="float:right;" fas icon="times" (click)="close();"></mdb-icon>
-    <div class="modal-header text-center">
-        Add a Product
+    <div class="modal-header justify-content-center">
+        <h5>Add a Product</h5>
     </div>
 
-    <div class="modal-body">
-        <div class="md-form form-group input-group">
-            <input mdbInput type="text" name="name" id="name" [(ngModel)]="product.name" class="form-control">
-            <label for="name" class="">Product Name...</label>
-            <br>
-            <div class="md-form mt-0 advanced-query">
-                <textarea templatedInput
-                          mdbInput
-                          type="text"
-                          id="description"
-                          class="md-textarea form-control no-border-bottom"
-                          name="description"
-                          [(ngModel)]="product.description"
-                          rows="3"
-                          ></textarea>
-                <label for="description">Product Description...</label>
-            </div>
-            <br>
-            <input mdbInput type="text" name="picture" id="picture" [(ngModel)]="product.picture" class="form-control">
-            <label for="picture" class="">Product Picture...</label>
-            <br>
-            <input mdbInput type="text" name="price" id="price" [(ngModel)]="product.price" class="form-control">
-            <label for="price" class="">Product Price...</label>
-            <br>
-            <button mdbBtn class="ml-5" type="button" color="primary" outline="true" (click)="addProduct()" mdbWavesEffect>Add</button>
+    <div class="modal-body" style="max-height: 85vh; overflow-y: scroll;">
+        <div #alert class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!showError">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Error: </strong> There was an error adding the product.
         </div>
+        <div class="md-form">
+            <input mdbInput type="text" name="name" id="name" [(ngModel)]="product.name" class="form-control">
+            <label for="name" class="">Name</label>
+        </div>
+        <div class="md-form mt-0 advanced-query">
+            <textarea templatedInput mdbInput type="text" id="description"
+                class="md-textarea form-control no-border-bottom" name="description" [(ngModel)]="product.description"
+                rows="3"></textarea>
+            <label for="description">Description</label>
+        </div>
+        <div class="md-form">
+            <input mdbInput type="text" name="picture" id="picture" [(ngModel)]="product.picture" class="form-control">
+            <label for="picture" class="">Picture</label>
+        </div>
+        <div class="md-form">
+            <div class="md-form">
+                <input type="number" class="form-control" id="numberInputEx" mdbInput>
+                <label for="numberInputEx">Price</label>
+            </div>
+        </div>
+        <button mdbBtn class="ml-5" type="button" color="primary" outline="true" (click)="addProduct()"
+            mdbWavesEffect>Add</button>
     </div>
 </div>
