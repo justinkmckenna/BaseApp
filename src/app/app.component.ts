@@ -15,12 +15,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.component = window.location.pathname.split('/')[1];
-    console.log(this.component);
   }
 
   public goToPage(component: string) {
     this.component = component;
-    console.log(this.component);
     this.router.navigateByUrl(`/${component}`);
 }
 }

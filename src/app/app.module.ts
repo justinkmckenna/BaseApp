@@ -10,9 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './components/products/products.component';
 import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { EditProductsComponent } from './components/editproducts/editproducts.component';
-import { AddProductComponent } from './components/addproduct/addproduct.component';
-import { UpdateProductComponent } from './components/updateproduct/updateproduct.component';
-import { DeleteProductComponent } from './components/deleteproduct/deleteproduct.component';
+import { AddProductComponent } from './components/editproducts/addproduct/addproduct.component';
+import { UpdateProductComponent } from './components/editproducts/updateproduct/updateproduct.component';
+import { DeleteProductComponent } from './components/editproducts/deleteproduct/deleteproduct.component';
 import { ProductService } from './services/product.service';
 
 

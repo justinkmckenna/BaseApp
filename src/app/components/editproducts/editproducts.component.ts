@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md';
-import { AddProductComponent } from '../addproduct/addproduct.component';
-import { UpdateProductComponent } from '../updateproduct/updateproduct.component';
-import { DeleteProductComponent } from '../deleteproduct/deleteproduct.component';
+import { AddProductComponent } from './addproduct/addproduct.component';
+import { UpdateProductComponent } from './updateproduct/updateproduct.component';
+import { DeleteProductComponent } from './deleteproduct/deleteproduct.component';
 
 @Component({
   selector: 'app-editproducts',
@@ -35,7 +35,7 @@ export class EditProductsComponent implements OnInit {
 
   deleteModal(product: Product) {
     this.modalRef = this.modalService.show(DeleteProductComponent);
-    this.modalRef.content.action.subscribe(() => { this.modalRef.hide() });
+    this.modalRef.content.actions.subscribe(() => { this.modalRef.hide() });
   }
 
   addProduct(product: Product) {

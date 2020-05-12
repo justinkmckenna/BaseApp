@@ -11,9 +11,10 @@ export class AddProductComponent {
 
   @Input() createHandler: Function;
   product: Product = new Product();
-  events: Subject<any> = new Subject();
+  action: Subject<any> = new Subject();
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService) {
+   }
 
   addProduct() {
     this.productService.createProduct(this.product).then((newProduct: Product) => {
@@ -23,7 +24,7 @@ export class AddProductComponent {
   }
 
   close() {
-    this.events.next("close");
+    this.action.next("close");
   }
 
 }
