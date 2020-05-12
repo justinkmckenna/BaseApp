@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-content-center h-100">
 
   <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
-    <mdb-navbar-brand style="color: #ffff;">My E-Commerce Website</mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand nav-link" style="color: #ffff;" (click)="goToPage('home')">BuyMyStuff</a></mdb-navbar-brand>
     <links>
       <ul class="navbar-nav mr-auto">
         <li [ngClass]="{'active': component == 'home'}" class="nav-item">
@@ -9,6 +9,9 @@
         </li>
         <li [ngClass]="{'active': component == 'products'}" class="nav-item">
           <a class="nav-link waves-light" (click)="goToPage('products')" mdbWavesEffect>Products</a>
+        </li>
+        <li [ngClass]="{'active': component == 'edit'}" class="nav-item">
+          <a class="nav-link waves-light" (click)="goToPage('edit')" mdbWavesEffect>Edit</a>
         </li>
       </ul>
     </links>

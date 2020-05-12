@@ -1,4 +1,5 @@
 <h1 class="text-center m-1">Products</h1>
+<a href="#" mdbBtn color="success" (click)="addModal()" mdbWavesEffect>Add</a>
 <div *ngFor="let product in products">
     <mdb-card>
         <!--Card image-->
@@ -15,9 +16,10 @@
           <mdb-card-text> 
               {{product.description}}
           </mdb-card-text>
-          
+      
           {{product.price}}
-          <a href="#" mdbBtn color="primary" mdbWavesEffect>Add To Cart</a>
+          <a href="#" mdbBtn color="warning" (click)="updateModal(product)" mdbWavesEffect>Edit</a>
+          <a href="#" mdbBtn color="danger" (click)="deleteModal(product)" mdbWavesEffect>Delete</a>
         </mdb-card-body>
       </mdb-card>
 </div>

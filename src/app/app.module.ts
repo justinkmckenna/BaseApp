@@ -9,6 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './components/products/products.component';
 import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { EditProductsComponent } from './components/editproducts/editproducts.component';
+import { AddProductComponent } from './components/addproduct/addproduct.component';
+import { UpdateProductComponent } from './components/updateproduct/updateproduct.component';
+import { DeleteProductComponent } from './components/deleteproduct/deleteproduct.component';
+import { ProductService } from './services/product.service';
 
 
 @NgModule({
@@ -16,7 +21,11 @@ import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.co
     AppComponent,
     HomeComponent,
     ProductsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EditProductsComponent,
+    AddProductComponent,
+    UpdateProductComponent,
+    DeleteProductComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +34,11 @@ import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.co
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
   ],
-  providers: [],
+  providers: [ProductService],
+  entryComponents: [
+    AddProductComponent, 
+    UpdateProductComponent, 
+    DeleteProductComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
