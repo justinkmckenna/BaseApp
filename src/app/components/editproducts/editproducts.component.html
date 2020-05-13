@@ -1,32 +1,36 @@
 <h1 class="m-3 text-center">Edit Products</h1>
-<div class="mx-auto mb-3" style="max-width:20px;">
+<div class="mx-auto mb-4" style="max-width:20px;">
   <mdb-icon fas icon="plus" style="margin-left: 4px;" (click)="addModal()"></mdb-icon>
 </div>
 <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-4 col-6 col-md-4 col-lg-3" *ngFor="let product of products">
-      <div class="list-group-item m-0 m-sm-1 m-md-2 m-lg-3 m-xl-4 p-0 mt-2 mb-2 text-center">
-        <mdb-icon fas icon="times-circle" (click)="deleteModal(product)"></mdb-icon>
-        <mdb-card (click)="updateModal(product)">
           <!--Card image-->
-          <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap">
-          </mdb-card-img>
-          <!--Card content-->
-          <mdb-card-body>
+      <div class="list-group-item m-0 m-sm-1 m-md-2 m-lg-3 m-xl-4 p-0 mt-2 mb-3 text-center">
+        <div class="product-wrap">
+          <mdb-icon class="delete" fas icon="times-circle" (click)="deleteModal(product)"></mdb-icon>
+          <mdb-card (click)="updateModal(product)">
+            <!--Card image-->
+            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg"
+              alt="Card image cap">
+            </mdb-card-img>
+            <!--Card content-->
+            <mdb-card-body>
 
-            <!--Title-->
-            <mdb-card-title>
-              <h4>{{product.name}}</h4>
-            </mdb-card-title>
+              <!--Title-->
+              <mdb-card-title>
+                <h4>{{product.name}}</h4>
+              </mdb-card-title>
 
-            <!--Text-->
-            <mdb-card-text>
-              {{product.description}}
-            </mdb-card-text>
+              <!--Text-->
+              <mdb-card-text>
+                {{product.description}}
+              </mdb-card-text>
 
-            ${{product.price}}.00
-          </mdb-card-body>
-        </mdb-card>
+              ${{product.price}}.00
+            </mdb-card-body>
+          </mdb-card>
+        </div>
       </div>
     </div>
   </div>
