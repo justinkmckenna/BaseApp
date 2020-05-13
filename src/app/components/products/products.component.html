@@ -1,28 +1,30 @@
 <h1 class="text-center m-3">Products</h1>
 <div class="container-fluid">
   <div class="row mb-2">
-      <div class="col-sm-4 col-6 col-md-4 col-lg-3" *ngFor="let product of products">
-          <div class="list-group-item m-0 m-sm-1 m-md-2 m-lg-3 m-xl-4 p-0 mt-2 mb-2 text-center">
-              <mdb-card>
-                <!--Card image-->
-                <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img>
-                <!--Card content-->
-                <mdb-card-body>
-              
-                  <!--Title-->
-                  <mdb-card-title>
-                    <h4>{{product.name}}</h4>
-                  </mdb-card-title>
-              
-                  <!--Text-->
-                  <mdb-card-text> 
-                      {{product.description}}
-                  </mdb-card-text>
-                  
-                  ${{product.price}}.00
-                </mdb-card-body>
-              </mdb-card>
-          </div>
+    <div class="col-sm-4 col-6 col-md-4 col-lg-3" *ngFor="let product of products">
+      <div class="list-group-item m-0 m-sm-1 m-md-2 m-lg-3 m-xl-4 p-0 mt-2 mb-2 text-center">
+        <mdb-card>
+          <!--Card image-->
+          <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap">
+          </mdb-card-img>
+          <!--Card content-->
+          <mdb-card-body>
+
+            <!--Title-->
+            <mdb-card-title>
+              <h4>{{product.name}}</h4>
+            </mdb-card-title>
+
+            <!--Text-->
+            <mdb-card-text>
+              <div class="description mb-2">
+                {{product.description}}
+              </div>
+              <p style="font-weight: bold;">${{product.price}}.00</p>
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
       </div>
+    </div>
   </div>
 </div>
