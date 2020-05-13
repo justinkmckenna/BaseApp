@@ -14,7 +14,8 @@ products.post("/", function (req, res) {
     const newProduct = new Product({
         name: req.body.name,
         description: req.body.description,
-        picture: req.body.picture
+        picture: req.body.picture,
+        price: req.body.price
     });
     newProduct.save(err => {
         if (err) return res.status(500).send(err);

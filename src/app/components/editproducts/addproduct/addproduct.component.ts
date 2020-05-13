@@ -9,7 +9,6 @@ import { Subject } from 'rxjs';
 })
 export class AddProductComponent {
 
-  @Input() createHandler: Function;
   @ViewChild('alert', { static: true }) alert: ElementRef;
   product: Product = new Product();
   action: Subject<any> = new Subject();
@@ -20,8 +19,7 @@ export class AddProductComponent {
 
   addProduct() {
     this.productService.createProduct(this.product).then((newProduct: Product) => {
-      this.createHandler(newProduct);
-      this.close();
+      this.action.next(newProduct);
     }).catch((err) => {
       this.showError = true;
     });

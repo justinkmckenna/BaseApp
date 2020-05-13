@@ -1,1 +1,21 @@
-<p>deleteproduct works!</p>
+<div class="text-center modal-lg dark-background">
+    <div class="modal-header d-flex justify-content-center">
+      <p class="heading">Delete A Product</p>
+    </div>
+  
+    <div class="modal-body">
+        <div #alert class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!showError">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Error: </strong> Unable to delete product.
+        </div>
+        Are you sure you want to delete {{product.name}}?
+    </div>
+  
+    <div class="modal-footer flex-center">
+        <button mdbBtn type="button" color="danger" outline="true" (click)="deleteProduct()" mdbWavesEffect>Yes</button>
+        <button mdbBtn type="button" color="primary" (click)="close()" mdbWavesEffect>No</button>
+    </div>
+  </div>
+  

@@ -25,17 +25,32 @@ export class EditProductsComponent implements OnInit {
 
   addModal() {
     this.modalRef = this.modalService.show(AddProductComponent);
-    this.modalRef.content.action.subscribe(() => { this.modalRef.hide() });
+    this.modalRef.content.action.subscribe((newProduct) => { 
+      if (newProduct != "close") {
+        this.addProduct(newProduct);
+      }
+      this.modalRef.hide();
+    });
   }
 
   updateModal(product: Product) {
-    this.modalRef = this.modalService.show(UpdateProductComponent);
-    this.modalRef.content.action.subscribe(() => { this.modalRef.hide() });
+    this.modalRef = this.modalService.show(UpdateProductComponent, { data: { product }});
+    this.modalRef.content.action.subscribe((updatedProduct) => { 
+      if (updatedProduct != "close") {
+        this.updateProduct(updatedProduct);
+      }
+      this.modalRef.hide() 
+    });
   }
 
   deleteModal(product: Product) {
-    this.modalRef = this.modalService.show(DeleteProductComponent);
-    this.modalRef.content.actions.subscribe(() => { this.modalRef.hide() });
+    this.modalRef = this.modalService.show(DeleteProductComponent, { data: { product }});
+    this.modalRef.content.action.subscribe((id) => { 
+      if (id != "close") {
+        this.deleteProduct(id);
+      }
+      this.modalRef.hide() 
+    });
   }
 
   addProduct(product: Product) {

@@ -1,1 +1,42 @@
-<p>updateproduct works!</p>
+<div class="modal-lg dark-background" style="max-height: 97vh; overflow-y: scroll;">
+
+    <mdb-icon class="p-1" style="float:right;" fas icon="times" (click)="close();"></mdb-icon>
+
+    <br>
+    <div class="modal-header justify-content-center mt-2">
+        <h4>Edit A Product</h4>
+    </div>
+
+    <div class="modal-body">
+        <div #alert class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!showError">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Error: </strong> Unable to update product.
+        </div>
+        <div class="md-form">
+            <input mdbInput type="text" name="name" id="name" [(ngModel)]="product.name" class="form-control">
+            <label for="name" class="">Name</label>
+        </div>
+        <div class="md-form mt-0 advanced-query">
+            <textarea templatedInput mdbInput type="text" id="description"
+                class="md-textarea form-control no-border-bottom" name="description" [(ngModel)]="product.description"
+                rows="3"></textarea>
+            <label for="description">Description</label>
+        </div>
+        <div class="md-form">
+            <input mdbInput type="text" name="picture" id="picture" [(ngModel)]="product.picture" class="form-control">
+            <label for="picture" class="">Picture</label>
+        </div>
+        <div class="md-form">
+            <div class="md-form">
+                <input type="number" class="form-control" id="numberInputEx" [(ngModel)]="product.price" mdbInput>
+                <label for="numberInputEx">Price</label>
+            </div>
+        </div>
+        <div class="text-center">
+            <button mdbBtn type="button" color="primary" outline="true" (click)="updateProduct()" mdbWavesEffect>Save</button>
+        </div>
+    </div>
+
+</div>

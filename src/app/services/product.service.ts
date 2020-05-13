@@ -12,19 +12,19 @@ export class ProductService {
         return await this.http.get<Product[]>(this.url).toPromise();
     }
 
-    async getProduct(contactId) {
-        return await this.http.get<Product>(this.url + '/' + contactId).toPromise();
+    async getProduct(id: string) {
+        return await this.http.get<Product>(this.url + '/' + id).toPromise();
     }
 
-    async createProduct(newContact) {
-        return await this.http.post<Product>(this.url, newContact).toPromise();
+    async createProduct(product: Product) {
+        return await this.http.post<Product>(this.url, product).toPromise();
     }
 
-    async deleteProduct(delContactId) {
-        return await this.http.delete<string>(this.url + '/' + delContactId).toPromise();
+    async deleteProduct(id: string) {
+        return await this.http.delete<string>(this.url + '/' + id).toPromise();
     }
 
-    async updateProduct(putContact) {
-        return await this.http.put<Product>(this.url + '/' + putContact._id, putContact).toPromise();
+    async updateProduct(product: Product) {
+        return await this.http.put<Product>(this.url + '/' + product._id, product).toPromise();
     }
 }

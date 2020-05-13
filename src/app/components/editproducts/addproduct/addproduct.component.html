@@ -1,10 +1,13 @@
-<div class="modal-lg dark-background">
+<div class="modal-lg dark-background" style="max-height: 97vh; overflow-y: scroll;">
+
     <mdb-icon class="p-1" style="float:right;" fas icon="times" (click)="close();"></mdb-icon>
-    <div class="modal-header justify-content-center">
-        <h5>Add a Product</h5>
+
+    <br>
+    <div class="modal-header justify-content-center mt-2">
+        <h4>Add A Product</h4>
     </div>
 
-    <div class="modal-body" style="max-height: 85vh; overflow-y: scroll;">
+    <div class="modal-body">
         <div #alert class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!showError">
             <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
                 <span aria-hidden="true">&times;</span>
@@ -31,7 +34,9 @@
                 <label for="numberInputEx">Price</label>
             </div>
         </div>
-        <button mdbBtn class="ml-5" type="button" color="primary" outline="true" (click)="addProduct()"
-            mdbWavesEffect>Add</button>
+        <div class="text-center">
+            <button mdbBtn type="button" color="primary" outline="true" (click)="addProduct()" mdbWavesEffect>Add</button>
+        </div>
     </div>
+
 </div>
