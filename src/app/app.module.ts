@@ -14,6 +14,7 @@ import { AddProductComponent } from './components/editproducts/addproduct/addpro
 import { UpdateProductComponent } from './components/editproducts/updateproduct/updateproduct.component';
 import { DeleteProductComponent } from './components/editproducts/deleteproduct/deleteproduct.component';
 import { ProductService } from './services/product.service';
+import { DetailsComponent } from './components/products/details/details.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ProductService } from './services/product.service';
     EditProductsComponent,
     AddProductComponent,
     UpdateProductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,9 @@ import { ProductService } from './services/product.service';
   entryComponents: [
     AddProductComponent, 
     UpdateProductComponent, 
-    DeleteProductComponent],
+    DeleteProductComponent,
+    DetailsComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

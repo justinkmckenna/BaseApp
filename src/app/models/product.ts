@@ -2,6 +2,6 @@ export class Product {
     _id?: string = "";
     name: string = "";
     description: string = "";
-    picture: string = "";
+    picture: any;
     price: number = 0;
   }

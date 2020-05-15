@@ -1,7 +1,37 @@
 const bodyParser = require("body-parser");
+const multer = require('multer');
+const path = require('path');
 const products = require('express').Router();
 const Product = require('../models/product');
 products.use(bodyParser.json());
+
+const storageEngine = multer.diskStorage({
+    desination: "../src/app/assets/product_images/",
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+})
+
+const upload = multer({
+    storage: storageEngine,
+    limits:{fileSize: 1000000},
+    fileFilter: function(req, file, callback) {
+        checkFileType(file, callback);
+    }
+}).single("productPicture");
+
+function checkFileType(file, callback) {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+        return callback(null, true);
+    }
+    else {
+        callback("Error: Images Only");
+    }
+}
 
 products.get("/", function (req, res) {
     Product.find((err, products) => {
@@ -11,10 +41,18 @@ products.get("/", function (req, res) {
 });
 
 products.post("/", function (req, res) {
+    let pictureName = "";
+    upload(req.body.picture, res, (err) => {
+        if (err) return res.status(500).send(err);
+        else {
+            if (req.body.picture == undefined) return res.status(401).send("No image to upload.");
+            else pictureName = req.body.picture.filename;
+        }
+    })
     const newProduct = new Product({
         name: req.body.name,
         description: req.body.description,
-        picture: req.body.picture,
+        picture: pictureName,
         price: req.body.price
     });
     newProduct.save(err => {

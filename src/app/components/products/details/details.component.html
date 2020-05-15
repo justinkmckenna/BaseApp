@@ -1,0 +1,27 @@
+<div class="modal-lg dark-background" style="max-height: 97vh; overflow-y: scroll;">
+    <div class="text-center">
+        <mdb-card>
+            <!--Card image-->
+            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img>
+            <!--Card content-->
+            <mdb-card-body>
+                <!--Title-->
+                <mdb-card-title>
+                    <h4>{{product.name}}</h4>
+                </mdb-card-title>
+    
+                <!--Text-->
+                <mdb-card-text>
+                    <div class="mb-2">
+                        {{product.description}}
+                    </div>
+                    <p style="font-weight: bold;">${{product.price}}.00</p>
+                    <div class="row justify-content-center">
+                        <button mdbBtn type="button" color="primary" (click)="addToCart()" mdbWavesEffect>Add To Cart</button>
+                        <button mdbBtn type="button" color="primary" outline="true" (click)="close()" mdbWavesEffect>Cancel</button>
+                    </div>
+                </mdb-card-text>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>

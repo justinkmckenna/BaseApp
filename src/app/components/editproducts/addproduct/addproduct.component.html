@@ -24,10 +24,8 @@
                 rows="3"></textarea>
             <label for="description">Description</label>
         </div>
-        <div class="md-form">
-            <input mdbInput type="text" name="picture" id="picture" [(ngModel)]="product.picture" class="form-control">
-            <label for="picture" class="">Picture</label>
-        </div>
+            <label for="productPicture">Picture</label>
+            <input type="file" name="productPicture" id="picture" [(ngModel)]="product.picture" class="form-control">
         <div class="md-form">
             <div class="md-form">
                 <input type="number" class="form-control" id="numberInputEx" [(ngModel)]="product.price" mdbInput>
