@@ -17,6 +17,7 @@ import { ProductService } from './services/product.service';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { DetailsComponent } from './components/products/details/details.component';
 import { FileUploadModule } from "ng2-file-upload";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { FileUploadModule } from "ng2-file-upload";
     MDBBootstrapModule.forRoot(),
     ToastrModule.forRoot(),
     FileUploadModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     ProductService,

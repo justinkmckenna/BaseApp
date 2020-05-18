@@ -1,43 +1,25 @@
 const bodyParser = require("body-parser");
 const multer = require('multer');
-const path = require('path');
 const products = require('express').Router();
 const Product = require('../models/product');
 products.use(bodyParser.json());
 
-const storageEngine = multer.diskStorage({
-    desination: "../src/app/assets/product_images/",
-    filename: function(req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now() + '-' + process.env.ENV + path.extname(file.originalname));
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + '-' + process.env.ENV)
     }
-})
-
-const upload = multer({
-    storage: storageEngine,
-    limits:{fileSize: 1000000},
-    fileFilter: function(req, file, callback) {
-        checkFileType(file, callback);
-    }
-}).single("productPicture");
-
-function checkFileType(file, callback) {
-    const filetypes = /jpeg|jpg|png|gif/;
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-        return callback(null, true);
-    }
-    else {
-        callback("Error: Images Only");
-    }
-}
+  })
+   
+var upload = multer({ storage: storage })
 
 products.get("/", (req, res) => {
     Product.find((err, products) => {
         if (err) return res.status(500).send(err)
         return res.status(200).send(products);
-    });
+    })
 });
 
 products.post("/", (req, res) => {
@@ -46,45 +28,47 @@ products.post("/", (req, res) => {
         description: req.body.description,
         pictures: req.body.pictures,
         price: req.body.price
-    });
+    })
     newProduct.save(err => {
-        if (err) return res.status(500).send(err);
-        return res.status(200).send(newProduct);
-    });
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(newProduct)
+    })
 });
 
-products.post("/pictures", (req, res) => {
-    upload(req.body.picture, res, (err) => {
-        if (err) return res.status(500).send(err);
-        if (req.body.picture == undefined) return res.status(401).send("No image to upload.");
-        return res.status(200).send("Success");
-    })
+products.post("/pictures", upload.single('file'), (req, res) => {
+    const file = req.file
+    if (!file) {
+        const error = new Error('Please upload a file')
+        error.httpStatusCode = 400
+        return res.status(400).send(error)
+    }
+    res.send(file)
 });
 
 products.get("/:id", (req, res) => {
     Product.findById(req.params.id, (err, product) => {
-        if (err) return res.status(500).send(err);
-        return res.send(product);
+        if (err) return res.status(500).send(err)
+        return res.send(product)
     })
 });
 
 products.put("/:id", (req, res) => {
     Product.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, product) => {
-        if (err) return res.status(500).send(err);
-        return res.send(product);
+        if (err) return res.status(500).send(err)
+        return res.send(product)
     });
 });
 
 products.delete("/:id", (req, res) => {
     Product.findByIdAndRemove(req.params.id, (err, product) => {
-        if (err) return res.status(500).send(err);
+        if (err) return res.status(500).send(err)
         if (product == null) return res.status(400).send("Not Found.");
         const response = {
             message: "Product successfully deleted",
             id: product._id
         };
-        return res.status(200).send(response);
-    });
+        return res.status(200).send(response)
+    })
 });
 
-module.exports = products;
+module.exports = products
