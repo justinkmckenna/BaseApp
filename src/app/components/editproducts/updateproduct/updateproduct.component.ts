@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { Subject } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-updateproduct',
@@ -9,12 +10,10 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class UpdateProductComponent implements OnInit {
 
-  @ViewChild('alert', { static: true }) alert: ElementRef;
   product: Product;
   action: Subject<any> = new Subject();
-  showError: boolean = false;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -23,16 +22,12 @@ export class UpdateProductComponent implements OnInit {
     this.productService.updateProduct(this.product).then((updatedProduct: Product) => {
       this.action.next(updatedProduct);
     }).catch((err) => {
-      this.showError = true;
+      this.toastr.error("Error: Unable To Update Product.");
     });
   }
 
   close() {
     this.action.next("close");
-  }
-
-  closeAlert() {
-    this.showError = false;
   }
 
 }

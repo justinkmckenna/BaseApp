@@ -5,6 +5,7 @@ import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md';
 import { AddProductComponent } from './addproduct/addproduct.component';
 import { UpdateProductComponent } from './updateproduct/updateproduct.component';
 import { DeleteProductComponent } from './deleteproduct/deleteproduct.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editproducts',
@@ -15,7 +16,7 @@ export class EditProductsComponent implements OnInit {
   products: Product[];
   modalRef: MDBModalRef;
 
-  constructor(private productService: ProductService, private modalService: MDBModalService) { }
+  constructor(private productService: ProductService, private modalService: MDBModalService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().then((products: Product[]) => {
@@ -28,6 +29,7 @@ export class EditProductsComponent implements OnInit {
     this.modalRef.content.action.subscribe((newProduct) => { 
       if (newProduct != "close") {
         this.addProduct(newProduct);
+        this.toastr.success(`Success: Added ${newProduct.name}`);
       }
       this.modalRef.hide();
     });
@@ -38,6 +40,7 @@ export class EditProductsComponent implements OnInit {
     this.modalRef.content.action.subscribe((updatedProduct) => { 
       if (updatedProduct != "close") {
         this.updateProduct(updatedProduct);
+        this.toastr.success(`Success: Updated ${updatedProduct.name}`);
       }
       this.modalRef.hide() 
     });
@@ -48,6 +51,7 @@ export class EditProductsComponent implements OnInit {
     this.modalRef.content.action.subscribe((id) => { 
       if (id != "close") {
         this.deleteProduct(id);
+        this.toastr.success(`Success: Deleted ${product.name}`);
       }
       this.modalRef.hide() 
     });

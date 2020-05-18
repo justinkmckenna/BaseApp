@@ -14,7 +14,9 @@ import { AddProductComponent } from './components/editproducts/addproduct/addpro
 import { UpdateProductComponent } from './components/editproducts/updateproduct/updateproduct.component';
 import { DeleteProductComponent } from './components/editproducts/deleteproduct/deleteproduct.component';
 import { ProductService } from './services/product.service';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { DetailsComponent } from './components/products/details/details.component';
+import { FileUploadModule } from "ng2-file-upload";
 
 
 @NgModule({
@@ -35,8 +37,13 @@ import { DetailsComponent } from './components/products/details/details.componen
     FormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
+    ToastrModule.forRoot(),
+    FileUploadModule,
   ],
-  providers: [ProductService],
+  providers: [
+    ProductService,
+    ToastrService,
+  ],
   entryComponents: [
     AddProductComponent, 
     UpdateProductComponent, 

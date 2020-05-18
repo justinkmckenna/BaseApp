@@ -8,12 +8,6 @@
     </div>
 
     <div class="modal-body">
-        <div #alert class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!showError">
-            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Error: </strong> Unable to update product.
-        </div>
         <div class="md-form">
             <input mdbInput type="text" name="name" id="name" [(ngModel)]="product.name" class="form-control">
             <label for="name" class="">Name</label>

@@ -4,12 +4,6 @@
     </div>
   
     <div class="modal-body">
-        <div #alert class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!showError">
-            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Error: </strong> Unable to delete product.
-        </div>
         Are you sure you want to delete {{product.name}}?
     </div>
   
