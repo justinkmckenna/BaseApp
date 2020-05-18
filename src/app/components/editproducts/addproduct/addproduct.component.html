@@ -21,8 +21,10 @@
         <div>
             <label for="productPicture">Pictures</label>
             <br>
-            <input type="file" ng2FileSelect [uploader]="uploader" multiple/>
-            <br>
+            <label for="file" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i> Choose Pictures...
+            </label>
+            <input id="file" type="file" ng2FileSelect [uploader]="uploader" multiple/>
             <ul class="list-group" *ngIf="uploader.queue.length > 0">
                 <li class="list-group-item" *ngFor="let item of uploader.queue">
                         {{ item?.file?.name }}
