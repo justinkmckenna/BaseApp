@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-4 col-6 col-md-4 col-lg-3" *ngFor="let product of products">
-      <div class="list-group-item m-0 m-sm-1 m-md-2 m-lg-3 m-xl-4 p-0 mt-2 mb-2 text-center">
+      <div class="m-0 m-sm-1 m-md-2 m-lg-3 m-xl-4 p-0 mt-2 mb-2 text-center">
         <mdb-card (click)="detailsModal(product)">
           <!--Card image-->
           <mdb-card-img src='../../../../assets/product_images/{{product.picture}}' alt="Card image cap">
