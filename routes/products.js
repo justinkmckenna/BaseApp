@@ -1,8 +1,10 @@
-const bodyParser = require("body-parser");
-const multer = require('multer');
-const products = require('express').Router();
-const Product = require('../models/product');
-products.use(bodyParser.json());
+const bodyParser = require("body-parser")
+const multer = require('multer')
+const fs = require('fs')
+const path = require('path')
+const products = require('express').Router()
+const Product = require('../models/product')
+products.use(bodyParser.json())
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -13,7 +15,16 @@ var storage = multer.diskStorage({
     }
   })
    
-var upload = multer({ storage: storage })
+var upload = multer({ 
+    storage: storage,
+    fileFilter: function (req, file, callback) {
+        var ext = path.extname(file.originalname).toLowerCase();
+        if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+            return callback(new Error('Only images are allowed.'))
+        }
+        callback(null, true)
+    }
+ })
 
 products.get("/", (req, res) => {
     Product.find((err, products) => {
@@ -35,15 +46,17 @@ products.post("/", (req, res) => {
     })
 });
 
-products.post("/pictures", upload.single('file'), (req, res) => {
-    const file = req.file
-    if (!file) {
-        const error = new Error('Please upload a file')
-        error.httpStatusCode = 400
-        return res.status(400).send(error)
-    }
-    res.send(file)
+products.post("/picture", upload.single('file'), (req, res) => {
+    if (!req.file) return res.status(500).send("Error Uploading File")
+    res.send(req.file.path)
 });
+
+products.post("/deletePictures", (req, res) => {
+    for(let path of req.body) {
+        fs.unlink(path, (err)=>{if(err)console.log(err)})
+    }
+    res.status(200).send(req.body)
+})
 
 products.get("/:id", (req, res) => {
     Product.findById(req.params.id, (err, product) => {

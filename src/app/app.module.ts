@@ -38,9 +38,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
-    ToastrModule.forRoot(),
     FileUploadModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     ProductService,

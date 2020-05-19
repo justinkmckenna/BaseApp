@@ -27,4 +27,8 @@ export class ProductService {
     async updateProduct(product: Product) {
         return await this.http.put<Product>(this.url + '/' + product._id, product).toPromise();
     }
+
+    async deletePictures(picturePaths: string[]) {
+        return await this.http.post<string[]>(this.url + '/deletePictures', picturePaths).toPromise();
+    }
 }
