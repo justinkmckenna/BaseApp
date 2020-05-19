@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class ProductService {
@@ -28,7 +28,12 @@ export class ProductService {
         return await this.http.put<Product>(this.url + '/' + product._id, product).toPromise();
     }
 
-    async deletePictures(picturePaths: string[]) {
-        return await this.http.post<string[]>(this.url + '/deletePictures', picturePaths).toPromise();
+    async addPictures(pictures: FormData) {
+        console.log(pictures)
+        return await this.http.post<File[]>(this.url + '/addPictures', pictures).toPromise();
+    }
+
+    async deletePictures(pictures: File[]) {
+        return await this.http.post<File[]>(this.url + '/deletePictures', pictures).toPromise();
     }
 }

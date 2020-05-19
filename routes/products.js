@@ -33,11 +33,11 @@ products.get("/", (req, res) => {
     })
 });
 
-products.post("/", (req, res) => {
+products.post("/",(req, res) => {
     const newProduct = new Product({
         name: req.body.name,
         description: req.body.description,
-        pictures: req.body.pictures,
+        picturePaths: picturePaths,
         price: req.body.price
     })
     newProduct.save(err => {
@@ -46,9 +46,9 @@ products.post("/", (req, res) => {
     })
 });
 
-products.post("/picture", upload.single('file'), (req, res) => {
-    if (!req.file) return res.status(500).send("Error Uploading File")
-    res.send(req.file.path)
+products.post("/addPictures", upload.array('picture'), (req, res) => {
+    if (!req.files) return res.status(500).send("Error Uploading Files")
+    res.send(req.files)
 });
 
 products.post("/deletePictures", (req, res) => {
