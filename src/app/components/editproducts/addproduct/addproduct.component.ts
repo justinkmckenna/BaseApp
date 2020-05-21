@@ -21,9 +21,8 @@ export class AddProductComponent {
       this.product.pictures = await Promise.all(this.product.pictures.map(async picture => {
         return await fileToBase64(picture)
       }))
-      console.log(this.product)
       let newProduct = await this.productService.createProduct(this.product)
-      this.action.next(newProduct);
+      this.action.next(newProduct)
     } catch (e) {
       console.log(e)
       this.toastr.error("Unable To Add Product", "Error")
