@@ -1,8 +1,9 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { fileToBase64 } from 'src/app/helpers/fileHelper'
 
 @Component({
   selector: 'app-addproduct',
@@ -12,41 +13,32 @@ export class AddProductComponent {
 
   product: Product = new Product()
   action: Subject<any> = new Subject()
-  pictures: File[] = []
 
   constructor(private productService: ProductService, private toastr: ToastrService) {}
 
-  addAll() {
-    let formData = new FormData()
-    for (let picture of this.pictures) { 
-      formData.append("picture", picture);
-    }
-    this.productService.addPictures(formData).then((newPictures: File[]) => {
-      console.log(newPictures)
-    }).catch((err) => {
-      console.log(err)
-      this.toastr.error("Error: Unable To Upload Pictures.")
-    });
-  }
-
-  addProduct() {
-    this.productService.createProduct(this.product).then((newProduct: Product) => {
+  async addProduct() {
+    try {
+      this.product.pictures = await Promise.all(this.product.pictures.map(async picture => {
+        return await fileToBase64(picture)
+      }))
+      console.log(this.product)
+      let newProduct = await this.productService.createProduct(this.product)
       this.action.next(newProduct);
-    }).catch((err) => {
-      console.log(err);
-      this.toastr.error("Error: Unable To Add Product.")
-    });
+    } catch (e) {
+      console.log(e)
+      this.toastr.error("Unable To Add Product", "Error")
+    }
   }
 
   onChange(event) {
-    var files = event.srcElement.files;
+    var files = event.srcElement.files
     for(let file of files) {
-      this.pictures.push(file)
+      this.product.pictures.push(file)
     }
   }
 
   removePicture(picture: File) {
-    this.pictures = this.pictures.filter(p => p.name != picture.name )
+    this.product.pictures = this.product.pictures.filter(p => p.name != picture.name )
   }
 
   close() {

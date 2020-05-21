@@ -4,7 +4,6 @@ const fs = require('fs')
 const path = require('path')
 const products = require('express').Router()
 const Product = require('../models/product')
-products.use(bodyParser.json())
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -37,26 +36,27 @@ products.post("/",(req, res) => {
     const newProduct = new Product({
         name: req.body.name,
         description: req.body.description,
-        picturePaths: picturePaths,
+        pictures: req.body.pictures,
         price: req.body.price
     })
+    console.log(newProduct)
     newProduct.save(err => {
         if (err) return res.status(500).send(err)
         return res.status(200).send(newProduct)
     })
 });
 
-products.post("/addPictures", upload.array('picture'), (req, res) => {
-    if (!req.files) return res.status(500).send("Error Uploading Files")
-    res.send(req.files)
-});
+// products.post("/addPictures", upload.array('picture'), (req, res) => {
+//     if (!req.files) return res.status(500).send("Error Uploading Files")
+//     res.send(req.files)
+// });
 
-products.post("/deletePictures", (req, res) => {
-    for(let path of req.body) {
-        fs.unlink(path, (err)=>{if(err)console.log(err)})
-    }
-    res.status(200).send(req.body)
-})
+// products.post("/deletePictures", (req, res) => {
+//     for(let path of req.body) {
+//         fs.unlink(path, (err)=>{if(err)console.log(err)})
+//     }
+//     res.status(200).send(req.body)
+// })
 
 products.get("/:id", (req, res) => {
     Product.findById(req.params.id, (err, product) => {

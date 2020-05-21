@@ -2,6 +2,6 @@ export class Product {
     _id?: string = "";
     name: string = "";
     description: string = "";
-    pictures: File[] = [];
+    pictures: any[] = [];
     price: number;
   }

@@ -5,7 +5,10 @@ const routes = require('./routes');
 const mongoose = require('mongoose');
 
 var app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    extended: true,
+    limit: '50mb'
+}));
 
 app.use(express.static(__dirname + '/dist/BaseApp'));
 app.use('/', routes);
