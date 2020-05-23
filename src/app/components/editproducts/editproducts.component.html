@@ -10,8 +10,8 @@
           <mdb-icon class="delete" fas icon="times-circle" (click)="deleteModal(product)"></mdb-icon>
           <mdb-card style="cursor: pointer;" (click)="updateModal(product)">
             <!--Card image-->
-            <mdb-card-img src='../../../assets/productPictures/{{product.pictures[0]}}'
-              alt="Card image cap">
+            <mdb-card-img src='{{product.pictures[0]}}'
+              alt="Product Picture">
             </mdb-card-img>
             <!--Card content-->
             <mdb-card-body>
