@@ -17,7 +17,7 @@ products.post('/', async (req, res) => {
     try {
         let pictures = await Promise.all(req.body.pictures.map(async p => {
             let fileName = Date.now() + '-' + process.env.ENV
-            let fileContent = Buffer.from(p.replace('data:image/jpeg;base64,',''), 'base64');
+            let fileContent = checkFileTypeAndSize(p)
             return await uploadFileToAWS(fileName, fileContent)
         }))
         console.log(pictures)
@@ -97,6 +97,18 @@ const deleteFileFromAWS = (fileName) => {
         if (err) throw err
         console.log("File deleted successfully");
     });
+}
+
+const checkFileTypeAndSize = (base64) => {
+    if (base64.includes('image/gif')) base64 = base64.replace('data:image/gif;base64,','')
+    else if (base64.includes('image/jpeg')) base64 = base64.replace('data:image/jpeg;base64,','')
+    else if (base64.includes('image/png')) base64 = base64.replace('data:image/png;base64,','')
+    else throw Error('Accepted File Types: gif, jpeg, png')
+
+    const buffer = Buffer.from(base64, 'base64');
+    if (buffer.length > 3145728) throw Error('Image Too Large')
+
+    return buffer
 }
 
 module.exports = products
