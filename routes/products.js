@@ -1,8 +1,5 @@
-const fs = require('fs')
 const products = require('express').Router()
 const Product = require('../models/product')
-const base64ToImage = require('base64-to-image');
-const uploadPath = './uploads/'
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ID,
@@ -19,11 +16,11 @@ products.get('/', (req, res) => {
 products.post('/', async (req, res) => {
     try {
         let pictures = await Promise.all(req.body.pictures.map(async p => {
-            return (await base64ToImage(p, uploadPath, { 'fileName': 'img-' + Date.now() + '-' + process.env.ENV })).fileName
+            let fileName = Date.now() + '-' + process.env.ENV
+            let fileContent = Buffer.from(p.replace('data:image/jpeg;base64,',''), 'base64');
+            return await uploadFile(fileName, fileContent)
         }))
-        pictures = await Promise.all(pictures.map(async p => {
-            return await uploadFile(p)
-        }))
+        console.log(pictures)
         const newProduct = new Product({
             name: req.body.name,
             description: req.body.description,
@@ -66,29 +63,22 @@ products.delete('/:id', (req, res) => {
     })
 });
 
-const uploadFile = (fileName) => {
+const uploadFile = (fileName, fileContent) => {
     return new Promise(resolve => {
         try {
-            // Read content from the file
-            const fileContent = fs.readFileSync(uploadPath + fileName)
-
-            // Setting up S3 upload parameters
             const params = {
                 Bucket: process.env.BUCKET_NAME,
-                Key: fileName, // File name you want to save as in S3
+                Key: fileName,
                 ContentType: 'image/jpeg',
                 ACL: 'public-read',
                 Body: fileContent
             };
 
-            // Uploading files to the bucket
             s3.upload(params, function (err, data) {
-                fs.unlink(uploadPath + fileName, (err) => { console.log(err) })
                 if (err) throw err
                 resolve(data.Location)
             });
         } catch (err) {
-            console.log(err)
             throw err
         }
     })
