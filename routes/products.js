@@ -18,7 +18,7 @@ products.post('/', async (req, res) => {
         let pictures = await Promise.all(req.body.pictures.map(async p => {
             let fileName = Date.now() + '-' + process.env.ENV
             let fileContent = Buffer.from(p.replace('data:image/jpeg;base64,',''), 'base64');
-            return await uploadFile(fileName, fileContent)
+            return await uploadFileToAWS(fileName, fileContent)
         }))
         console.log(pictures)
         const newProduct = new Product({
@@ -55,6 +55,10 @@ products.delete('/:id', (req, res) => {
     Product.findByIdAndRemove(req.params.id, (err, product) => {
         if (err) return res.status(500).send(err)
         if (product == null) return res.status(400).send("Not Found.");
+        for (let picture of product.pictures) {
+            let fileName = picture.replace('https://base-app-product-pictures.s3.amazonaws.com/', '')
+            deleteFileFromAWS(fileName)
+        }
         const response = {
             message: "Product successfully deleted",
             id: product._id
@@ -63,7 +67,7 @@ products.delete('/:id', (req, res) => {
     })
 });
 
-const uploadFile = (fileName, fileContent) => {
+const uploadFileToAWS = (fileName, fileContent) => {
     return new Promise(resolve => {
         try {
             const params = {
@@ -83,5 +87,16 @@ const uploadFile = (fileName, fileContent) => {
         }
     })
 };
+
+const deleteFileFromAWS = (fileName) => {
+    var params = {
+        Bucket: process.env.BUCKET_NAME,
+        Key: fileName
+    };
+    s3.deleteObject(params, function (err, data) {
+        if (err) throw err
+        console.log("File deleted successfully");
+    });
+}
 
 module.exports = products
